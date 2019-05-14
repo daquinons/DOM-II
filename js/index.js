@@ -80,7 +80,6 @@ function getSelectionText() {
   let selection = window.getSelection();
   if (selection) {
       text = window.getSelection().toString();
-      console.log(window.getSelection());
   } else if (document.selection && document.selection.type != "Control") {
       text = document.selection.createRange().text;
   }
@@ -107,3 +106,19 @@ document.addEventListener('keyup', () => {
   let buttons = document.querySelectorAll('.btn');
   buttons.forEach((button) => button.style.backgroundColor = "#"+((1<<24)*Math.random()|0).toString(16));
 })
+
+// Event propagation
+
+let buttonContainers = document.querySelectorAll('.btn-container');
+buttonContainers.forEach((buttonContainer) => {
+  buttonContainer.addEventListener('click', () => {
+    console.log("Container clicked");
+  });
+
+  let button = buttonContainer.querySelector('.btn');
+  button.addEventListener('click', (evt) => {
+    console.log("Button clicked!")
+    evt.stopPropagation();
+  });
+
+});
