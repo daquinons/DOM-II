@@ -116,9 +116,18 @@ buttonContainers.forEach((buttonContainer) => {
   });
 
   let button = buttonContainer.querySelector('.btn');
-  button.addEventListener('click', (evt) => {
+  button.addEventListener('click', (event) => {
     console.log("Button clicked!")
-    evt.stopPropagation();
+    event.stopPropagation();
   });
-
 });
+
+// Prevent default
+
+let navElements = document.querySelectorAll('nav a');
+navElements.forEach((element) => {
+  element.addEventListener('click', (event) => {
+    console.log("Prevented default behaviour");
+    event.preventDefault();
+  })
+})
